@@ -15,7 +15,7 @@ function calculateWorkingHour() {
 	esac;
 	echo $workingHour;
 }
-
+declare -A day
 perHourSalary=20;
 totalSalary=0;
 totalWorkingHour=0;
@@ -35,6 +35,6 @@ do
 	((day++));
 echo "Employee daily wage:"${salary[@]}
 echo "Employee Total wage:"${totalSalary[*]}
-
+echo "Employee Day wise wage:"${day[@]}
 done
 echo "Employee has earned $totalSalary $ in a month (Total working Hour : $totalWorkingHour)";
