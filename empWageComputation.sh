@@ -1,23 +1,37 @@
 echo "Welcome to Employee Wage Computation Program"
 
-isPartTime=1
-isFullTime=2
-totalSalary=0
-empRatePerHr=20
-numWorkingDays=20
-for (( day=1;day<=$numWorkingDays;day++ ))
+perHourSalary=20;
+workingHour=0;
+totalSalary=0;
+totalWorkingHour=0;
+day=1;
+while [[ $day -le 20 && $totalWorkingHour -lt 100 ]]
 do
-	empCheck=$((RANDOM%3))
-		case $empCheck in $isFullTime)
-			empHrs=8;;
-		$isPartTime)
-			empHrs=4;;
-		*)
-			empHrs=0;;
+	isPresent=$((RANDOM%3));
+	case $isPresent in
+		0)
+		#echo "Employee is absent";
+		workingHour=0;
+		;;
+
+		1)
+		#echo "Employee is present";
+		workingHour=8;
+		;;
+
+		2)
+		#echo "Employee is working as part time";
+		workingHour=4;
+		;;
 	esac
-
-	salary=$(($empHrs*$empRatePerHr))
-	totalSalary=$(($totalSalary+$salary))
+	totalWorkingHour=$(($totalWorkingHour + $workingHour));
+	if [ $totalWorkingHour -gt 100 ]
+	then
+		totalWorkingHour=$(($totalWorkingHour - $workingHour));
+		break;
+	fi
+	salary=$(($perHourSalary * $workingHour));
+	totalSalary=$(($totalSalary + $salary));
+	((day++));
 done
-
-echo "Employee has earned Rs.$totalSalary salary in a month"
+echo "Employee has earned $totalSalary $ in a month (Total working Hour : $totalWorkingHour)";
